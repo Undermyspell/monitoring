@@ -1,0 +1,31 @@
+version: '3.9'
+
+volumes:
+  prometheus-conf:
+  prometheus-data:
+  grafana-storage:
+
+services:
+  nestjsapi:
+    container_name: nestsjs-api
+    build: .
+    ports:
+      - 3000:3000
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - prometheus-conf:/etc/prometheus
+      - prometheus-data:/prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.retention.time=3d
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    ports:
+      - 2000:3000
