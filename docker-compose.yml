@@ -9,6 +9,8 @@ services:
   nestjsapi:
     container_name: nestsjs-api
     build: .
+    volumes:
+      - ./log:/app/log
     ports:
       - 3000:3000
   prometheus:
