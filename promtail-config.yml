@@ -9,10 +9,10 @@ client:
   url: http://loki:3100/api/prom/push
 
 scrape_configs:
-  - job_name: containers
+  - job_name: apis
     static_configs:
       - targets:
           - localhost
         labels:
-          job: containerlogs
-          __path__: /var/lib/docker/containers/*/*log
+          job: nestjs
+          __path__: /var/log/*/*log

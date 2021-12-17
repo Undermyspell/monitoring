@@ -32,7 +32,7 @@ services:
     container_name: promtail
     image: grafana/promtail
     volumes:
-      - //wsl$$/docker-desktop-data/version-pack-data/community/docker/containers:/var/lib/docker/containers:ro
+      - ./log:/var/log
       - ./promtail-config.yml:/etc/promtail/docker-config.yml
     command: -config.file=/etc/promtail/docker-config.yml
   grafana:

@@ -2,11 +2,14 @@ import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Counter, Histogram } from "prom-client";
 import { InjectMetric } from "@willsoto/nestjs-prometheus";
+import { FileLogger } from './file-logger';
+import { readFileSync } from 'fs';
 
 @Controller()
 export class AppController {
   constructor(
     private readonly appService: AppService,
+    private readonly logger: FileLogger,
     @InjectMetric("http_request_count_total") public counter: Counter<string>,
     @InjectMetric("http_request_duration_seconds") public histogram: Histogram<string>) { }
 
@@ -20,7 +23,6 @@ export class AppController {
     this.counter.inc()
   }
 
-
   @Get("longRunning")
   longRunning(): void {
     const start = new Date();
@@ -32,6 +34,15 @@ export class AppController {
     }, random)
 
     this.counter.inc()
+  }
+
+  @Get("error")
+  error(): void {
+    try {
+      readFileSync('./not_found.txt')
+    } catch (error) {
+      this.logger.error(error)
+    }
   }
 
   getRandomInt(min, max) {

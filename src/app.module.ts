@@ -2,12 +2,14 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrometheusModule, makeCounterProvider, makeHistogramProvider, makeGaugeProvider } from "@willsoto/nestjs-prometheus";
+import { FileLogger } from './file-logger';
 
 @Module({
   imports: [PrometheusModule.register()],
   controllers: [AppController],
   providers: [
     AppService,
+    FileLogger,
     makeCounterProvider({
       name: "http_request_count_total",
       help: "Count of all requests",
