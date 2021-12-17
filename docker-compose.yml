@@ -22,6 +22,19 @@ services:
     command:
       - --config.file=/etc/prometheus/prometheus.yml
       - --storage.tsdb.retention.time=3d
+  loki:
+    container_name: loki
+    image: grafana/loki
+    ports:
+      - 3100:3100
+    command: -config.file=/etc/loki/local-config.yaml
+  promtail:
+    container_name: promtail
+    image: grafana/promtail
+    volumes:
+      - //wsl$$/docker-desktop-data/version-pack-data/community/docker/containers:/var/lib/docker/containers:ro
+      - ./promtail-config.yml:/etc/promtail/docker-config.yml
+    command: -config.file=/etc/promtail/docker-config.yml
   grafana:
     container_name: grafana
     image: grafana/grafana
