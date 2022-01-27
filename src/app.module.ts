@@ -13,6 +13,7 @@ import { FileLogger } from './file-logger';
     makeCounterProvider({
       name: "http_request_count_total",
       help: "Count of all requests",
+      labelNames: ['device_Id']
     }),
     makeHistogramProvider({
       name: "http_request_duration_seconds",

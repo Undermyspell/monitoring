@@ -7,6 +7,9 @@ import { readFileSync } from 'fs';
 
 @Controller()
 export class AppController {
+
+  deviceIds: string[] = ['mk-test-123', 'cp-iot-555']
+
   constructor(
     private readonly appService: AppService,
     private readonly logger: FileLogger,
@@ -20,7 +23,9 @@ export class AppController {
 
   @Get("increase")
   increase(): void {
-    this.counter.inc()
+    const random = this.getRandomInt(0, 2)
+    const deviceId = this.deviceIds[random];
+    this.counter.labels({ "device_Id": deviceId }).inc()
   }
 
   @Get("longRunning")
