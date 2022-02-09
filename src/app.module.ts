@@ -18,7 +18,19 @@ import { FileLogger } from './file-logger';
     makeHistogramProvider({
       name: "http_request_duration_seconds",
       help: "Duration of request in separate buckets",
-      buckets: [1, 2, 5, 10, 20]
-    })],
+      buckets: [1, 2, 5, 10, 20],
+      labelNames: ['device_Id']
+    }),
+    makeGaugeProvider({
+      name: "device_cpu_temperature",
+      help: "device cpu temperature",
+      labelNames: ['device_Id']
+    }),
+    makeGaugeProvider({
+      name: "device_ram_usage",
+      help: "device ram usage",
+      labelNames: ['device_Id']
+    })
+  ],
 })
 export class AppModule { }
