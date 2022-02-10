@@ -22,7 +22,7 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1644484430137,
+  "iteration": 1644496295560,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -313,11 +313,10 @@
           "color": {
             "mode": "thresholds"
           },
+          "decimals": 0,
           "mappings": [],
-          "max": 100,
-          "min": 0,
           "thresholds": {
-            "mode": "percentage",
+            "mode": "absolute",
             "steps": [
               {
                 "color": "green",
@@ -325,7 +324,7 @@
               },
               {
                 "color": "#EAB839",
-                "value": 60
+                "value": 50
               },
               {
                 "color": "red",
@@ -333,7 +332,7 @@
               }
             ]
           },
-          "unit": "percent"
+          "unit": "celsius"
         },
         "overrides": []
       },
@@ -343,16 +342,19 @@
         "x": 4,
         "y": 8
       },
-      "id": 14,
+      "id": 16,
       "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "text": {},
+        "textMode": "auto"
       },
       "pluginVersion": "8.3.2",
       "targets": [
@@ -369,7 +371,7 @@
         }
       ],
       "title": "CPU Temperature",
-      "type": "gauge"
+      "type": "stat"
     },
     {
       "fieldConfig": {
@@ -527,7 +529,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "cp-iot-555",
           "value": "cp-iot-555"
         },
@@ -550,13 +552,13 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Test",
   "uid": "Cw9H2r27k",
-  "version": 25,
+  "version": 26,
   "weekStart": ""
 }
