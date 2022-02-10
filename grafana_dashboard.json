@@ -22,6 +22,7 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 1,
+  "iteration": 1644484430137,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -68,13 +69,13 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "jBNLY92nk"
+            "uid": "2Plna32nz"
           },
           "exemplar": true,
-          "expr": "(increase(http_request_count_total[$__range]) / $__range_s) * 60 ",
+          "expr": "(increase(http_request_count_total{device_Id=\"${deviceid}\"}[$__range]) / $__range_s) * 60 ",
           "format": "time_series",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "{{device_Id}}",
           "refId": "A"
         }
       ],
@@ -136,7 +137,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "jBNLY92nk"
+            "uid": "2Plna32nz"
           },
           "exemplar": true,
           "expr": "increase(http_request_duration_seconds_sum[$__range]) / increase(http_request_duration_seconds_count[$__range])",
@@ -188,6 +189,7 @@
               "mode": "off"
             }
           },
+          "links": [],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -226,20 +228,148 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "jBNLY92nk"
+            "uid": "2Plna32nz"
           },
           "exemplar": true,
-          "expr": "rate(http_request_count_total[1m]) * 60",
+          "expr": "rate(http_request_count_total{device_Id=\"${deviceid}\"}[1m]) * 60  ",
           "format": "time_series",
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
+          "legendFormat": "{{device_Id}}",
           "refId": "A"
         }
       ],
       "title": "Requests per minute",
       "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 0,
+        "y": 8
+      },
+      "id": 12,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "8.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "2Plna32nz"
+          },
+          "exemplar": true,
+          "expr": "device_ram_usage{device_Id=\"${deviceid}\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "RAM Usage",
+      "type": "gauge"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 60
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 4,
+        "y": 8
+      },
+      "id": 14,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "8.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "2Plna32nz"
+          },
+          "exemplar": true,
+          "expr": "device_cpu_temperature{device_Id=\"${deviceid}\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "CPU Temperature",
+      "type": "gauge"
     },
     {
       "fieldConfig": {
@@ -302,7 +432,7 @@
         "h": 11,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 16
       },
       "id": 8,
       "options": {
@@ -321,7 +451,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "jBNLY92nk"
+            "uid": "2Plna32nz"
           },
           "exemplar": true,
           "expr": "rate(http_request_duration_seconds_bucket[1m]) * 60",
@@ -348,7 +478,7 @@
         "h": 10,
         "w": 18,
         "x": 0,
-        "y": 19
+        "y": 27
       },
       "heatmap": {},
       "hideZeroBuckets": false,
@@ -362,7 +492,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "jBNLY92nk"
+            "uid": "2Plna32nz"
           },
           "exemplar": true,
           "expr": "increase(http_request_duration_seconds_bucket[1m])",
@@ -389,21 +519,44 @@
       "yBucketBound": "auto"
     }
   ],
-  "refresh": false,
+  "refresh": "",
   "schemaVersion": 33,
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "cp-iot-555",
+          "value": "cp-iot-555"
+        },
+        "definition": "label_values(device_Id)",
+        "hide": 0,
+        "includeAll": true,
+        "multi": false,
+        "name": "deviceid",
+        "options": [],
+        "query": {
+          "query": "label_values(device_Id)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Test",
   "uid": "Cw9H2r27k",
-  "version": 8,
+  "version": 25,
   "weekStart": ""
 }
