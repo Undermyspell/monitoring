@@ -42,5 +42,6 @@ services:
     image: grafana/grafana
     volumes:
       - grafana-storage:/var/lib/grafana
+      - ./grafana.ini:/etc/grafana/grafana.ini
     ports:
       - 2000:3000
