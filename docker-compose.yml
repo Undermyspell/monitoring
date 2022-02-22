@@ -12,7 +12,7 @@ services:
     volumes:
       - ./log:/app/log
     ports:
-      - 3000:3000
+      - 5000:5000
   prometheus:
     container_name: prometheus
     image: prom/prometheus
@@ -24,6 +24,9 @@ services:
     command:
       - --config.file=/etc/prometheus/prometheus.yml
       - --storage.tsdb.retention.time=3d
+      - --web.config.file=/etc/prometheus/web.yml
+      - --web.enable-remote-write-receiver
+      # - --enable-feature=remote-write-receiver
   loki:
     container_name: loki
     image: grafana/loki
@@ -44,4 +47,4 @@ services:
       - grafana-storage:/var/lib/grafana
       - ./grafana.ini:/etc/grafana/grafana.ini
     ports:
-      - 2000:3000
+      - 3000:3000
