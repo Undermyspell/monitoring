@@ -7,6 +7,6 @@ async function bootstrap() {
     logger: new FileLogger()
   });
   app.enableCors();
-  await app.listen(5000);
+  await app.listen(5555);
 }
 bootstrap();

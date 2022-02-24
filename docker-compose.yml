@@ -12,7 +12,7 @@ services:
     volumes:
       - ./log:/app/log
     ports:
-      - 5000:5000
+      - 5555:5555
   prometheus:
     container_name: prometheus
     image: prom/prometheus
